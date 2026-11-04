@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="CIDVista.MainPage"
+    Title="Caller ID">
+
+    <!-- El Grid permite superponer el fondo blanco, la imagen PNG y el contenido -->
+    <Grid>
+        <!-- 1. Fondo blanco para crear contraste -->
+        <BoxView BackgroundColor="White" />
+
+        <!-- 2. Imagen PNG de fondo / marca de agua -->
+        <Image Source="logoprotege.png"
+               Aspect="AspectFit" 
+               Opacity="0.18"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <!-- 3. Contenido principal con tipografía grande, oscura y en negrita -->
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="24"
+                Spacing="18"
+                VerticalOptions="Center">
+
+                <!-- Título superior -->
+                <Label
+                    Text="Llamada entrante"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="#111111" />
+
+                <!-- Nombre del contacto (Binding principal) -->
+                <Label
+                    Text="{Binding NombreContacto, FallbackValue='Esperando llamada'}"
+                    FontSize="34"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="#000000" />
+
+                <!-- Número telefónico actual (Binding) -->
+                <Label
+                    Text="{Binding NumeroActual, FallbackValue='+52 9999001128'}"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    TextColor="#222222"
+                    Margin="0,0,0,10" />
+
+                <!-- Texto de cuentas vinculadas (Binding) -->
+                <Label
+                    Text="{Binding TotalCuentasTexto, FallbackValue='Esperando llamada'}"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="#111111"
+                    Margin="0,10,0,0" />
+
+                <!-- Título de sección -->
+                <Label
+                    Text="Redirección a softguard:"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="#111111" />
+
+                <!-- Listado de cuentas vinculadas -->
+                <CollectionView
+                    ItemsSource="{Binding CuentasVinculadas}"
+                    SelectionMode="None">
+
+                    <CollectionView.EmptyView>
+                        <Label
+                            Text="No se encontraron cuentas."
+                            Padding="10"
+                            HorizontalOptions="Center"
+                            TextColor="#444444"
+                            FontAttributes="Bold"
+                            FontSize="16" />
+                    </CollectionView.EmptyView>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Button
+                                Text="{Binding .}"
+                                BackgroundColor="#2C5282"
+                                TextColor="White"
+                                FontSize="18"
+                                FontAttributes="Bold"
+                                CornerRadius="8"
+                                Margin="0,6"
+                                HeightRequest="55"
+                                HorizontalOptions="Fill" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Botones inferiores de acción (Colgar / Contestar) -->
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="12" Margin="0,20,0,0">
+                    <Button
+                        Grid.Column="0"
+                        Text="Colgar"
+                        TextColor="White"
+                        BackgroundColor="#C53030"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="60"
+                        Command="{Binding ColgarCommand}" />
+
+                    <Button
+                        Grid.Column="1"
+                        Text="Contestar"
+                        TextColor="White"
+                        BackgroundColor="#276749"
+                        FontSize="18"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="60"
+                        Command="{Binding ContestarCommand}" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

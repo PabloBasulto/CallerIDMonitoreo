@@ -1,0 +1,30 @@
+# Compilación de .NET
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configuraciones locales
+*.env
+.env
+appsettings.Development.json
+
+# Archivos de macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode
+DerivedData/
+*.xcuserstate
+xcuserdata/
+
+# Archivos temporales
+*.tmp
+*.log
+
